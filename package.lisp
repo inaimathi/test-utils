@@ -4,10 +4,10 @@
   (:use #:cl #:prove #:cl-quickcheck)
   (:shadowing-import-from #:prove #:is #:isnt)
   (:export
-   #:a-suite #:qchecks
+   #:a-suite #:qchecks #:quiet-check
 
-   #:a-boolean #:a-string #:a-symbol #:a-char #:a-ratio #:a-number #:a-real #:an-atom
-   #:an-index #:a-list #:a-member #:a-tuple
+   #:a-boolean #:a-string #:a-symbol #:a-char #:a-ratio #:a-number #:a-real #:an-atom #:a-value
+   #:an-index #:a-vector #:a-hash #:a-list #:a-member #:a-tuple
 
    ;; re-export :quickcheck symbols
    #:quickcheck #:is= #:isnt= #:should-signal
