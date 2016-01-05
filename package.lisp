@@ -2,12 +2,13 @@
 
 (defpackage #:test-utils
   (:use #:cl #:prove #:cl-quickcheck)
+  (:import-from #:alexandria #:with-gensyms)
   (:shadowing-import-from #:prove #:is #:isnt)
   (:export
    #:a-suite #:qchecks #:quiet-check
 
-   #:a-boolean #:a-string #:a-symbol #:a-char #:a-ratio #:a-number #:a-real #:an-atom #:a-value
-   #:an-index #:a-vector #:a-hash #:a-list #:a-member #:a-tuple
+   #:a-boolean #:a-string #:a-symbol #:a-char #:an-integer #:a-ratio #:a-number #:a-real #:an-atom #:a-value
+   #:an-index  #:a-vector #:a-hash #:a-list #:a-member #:a-tuple
 
    ;; re-export :quickcheck symbols
    #:quickcheck #:is= #:isnt= #:should-signal

@@ -11,16 +11,15 @@ Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet address
 
 (defmacro quiet-check (&body body)
   "Like :quickcheck, but squelches the initial seed reporting. Useful for running quickcheck properties in the middle of :prove suites."
-  (let ((res (gensym))
-	(msg (gensym))
-	(short-msg (gensym)))
+  (with-gensyms (res msg short-msg)
     `(let ((,res nil)
 	   (,msg nil))
        (setf ,msg (with-output-to-string (*standard-output*)
 		    (setf ,res (quickcheck ,@body))))
-       (let ((,short-msg (subseq ,msg (nth-value 1 (read-from-string ,msg nil nil :start 25)))))
-	 (unless ,res (format t "~a" ,short-msg))
-	 ,res))))
+       (unless ,res
+	 (let ((,short-msg (subseq ,msg (nth-value 1 (read-from-string ,msg nil nil :start 25)))))
+	   (format t "~a" ,short-msg)))
+       ,res)))
 
 (defmacro qchecks (quickcheck-test &optional message)
   "Form for calling quickcheck tests from a prove test (this lets you easily execute :quickcheck properties as part of a prove:run)"
