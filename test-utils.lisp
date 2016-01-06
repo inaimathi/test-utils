@@ -42,14 +42,8 @@ Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet address
 (defparameter a-number
   (a-member an-integer a-real a-ratio))
 
-(defparameter an-atom
-  (a-member a-number a-boolean a-string a-symbol a-char))
-
 (defun a-vector (generator)
   (lambda () (coerce (generate (a-list generator)) 'vector)))
-
-(defun a-pair (a-generator b-generator)
-  (lambda () (cons (generate a-generator) (generate b-generator))))
 
 (defun a-hash (key-generator value-generator)
   (lambda ()
@@ -60,5 +54,14 @@ Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet address
 	 do (setf (gethash k res) v))
       res)))
 
+(defparameter an-atom
+  (let ((primitive-atom (a-member a-number a-boolean a-string a-symbol a-char)))
+    (a-member a-number a-boolean a-string a-symbol a-char
+	      (a-vector primitive-atom)
+	      (a-hash primitive-atom primitive-atom))))
+
+(defun a-pair (a-generator b-generator)
+  (lambda () (cons (generate a-generator) (generate b-generator))))
+
 (defparameter a-value
-  (a-member an-atom (a-pair an-atom an-atom) (a-list an-atom) (a-vector an-atom) (a-hash an-atom an-atom)))
+  (a-member an-atom (a-pair an-atom an-atom) (a-list an-atom)))
