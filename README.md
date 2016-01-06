@@ -15,10 +15,48 @@
 
  (for-all ((a a-number) (b a-number))
    (is= (+ a b) (+ b a))
-   "Addition is idempotent"))
+   "Addition is commutative"))
 ```
 
-This test suite will pass with flying colors. It combines four `prove` tests, and one `cl-quickcheck` test.
+This test suite will pass with flying colors.
+
+```
+; SLIME 2015-06-01
+CL-USER> (ql:quickload :test-utils)
+To load "test-utils":
+  Load 1 ASDF system:
+    test-utils
+; Loading "test-utils"
+..................................................
+[package test-utils]
+(:TEST-UTILS)
+CL-USER> (defpackage :testing (:use :cl :test-utils))
+#<PACKAGE "TESTING">
+CL-USER> (in-package :testing)
+#<PACKAGE "TESTING">
+TESTING> (tests
+ (is (+ 1 2) 3 "Addition works")
+ (is (+ 3 3 3 6) 15 "Addition works on more than two numbers")
+ (is (+ -1 -1 -1) -3 "Addition works on negative numbers")
+ (is (+ -1 2) 1 "Addition works on negative and positive numbers together")
+
+ (for-all ((a a-number) (b a-number))
+   (is= (+ a b) (+ b a))
+   "Addition is commutative"))
+1..5
+
+  ✓ Addition works
+  ✓ Addition works on more than two numbers
+  ✓ Addition works on negative numbers
+  ✓ Addition works on negative and positive numbers together
+  ✓ Addition is commutative
+
+✓ 5 tests completed (3ms)
+T
+TESTING>
+```
+
+It combines four `prove` tests, and one `cl-quickcheck` test.
 
 ## Exported Symbols
 
