@@ -4,15 +4,16 @@
   (:use #:cl #:prove #:cl-quickcheck)
   (:import-from #:alexandria #:with-gensyms)
   (:shadowing-import-from #:prove #:is #:isnt)
+  (:shadow #:for-all)
   (:export
-   #:a-suite #:qchecks #:quiet-check
+   #:tests #:qchecks #:quiet-check #:for-all
 
    #:a-boolean #:a-string #:a-symbol #:a-char #:an-integer #:a-ratio #:a-number #:a-real #:an-atom #:a-value
-   #:an-index  #:a-vector #:a-hash #:a-list #:a-member #:a-tuple
+   #:an-index  #:a-pair #:a-vector #:a-hash #:a-list #:a-member #:a-tuple
 
    ;; re-export :quickcheck symbols
    #:quickcheck #:is= #:isnt= #:should-signal
-   #:named #:wrap-each #:only-if #:for-all
+   #:named #:wrap-each #:only-if
    #:k-generator #:m-generator #:n-generator
    #:define #:generate #:pick-weighted
    #:*testing* #:*break-on-failure* #:*loud* #:*num-trials* #:*size*
