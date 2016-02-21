@@ -36,6 +36,11 @@ Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet address
 (defparameter a-char #'cl-quickcheck:a-char)
 
 ;;;;; New quickcheck generators
+(defun one-of (&rest elems)
+  (let ((es (coerce elems 'vector)))
+    (lambda ()
+      (aref es (random (length es))))))
+
 (defparameter a-ratio
   (lambda () (rationalize (generate a-real))))
 

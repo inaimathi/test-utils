@@ -76,6 +76,8 @@ New compound generators are `a-pair`, `a-vector` and `a-hash`.
 
 There is one new generator named `a-value`, which returns an arbitrary value tree. It can return an atom, or any of the compound forms above with atoms in all slots filled with atoms. It's not exactly type-sound, but comes in handy when testing symbol-manipulation procedures or macros.
 
+There is one new generator named `one-of`. It takes a list of values, and generates one of the given values. It works sort of like `a-member`, but for constants.
+
 ### `tests (&rest forms)`
 
 A macro that counts off the given tests and calls `prove:finalize` after all tests. It automates some otherwise manual book-keeping required by `prove`. It takes any number of `prove` tests.
