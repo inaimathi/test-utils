@@ -47,8 +47,41 @@ Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet address
 (defparameter a-number
   (a-member an-integer a-real a-ratio))
 
+(defparameter a-keyword
+  (lambda ()
+    (intern (generate a-string) :keyword)))
+
+(defun an-alist (key-generator value-generator)
+  (a-list (a-pair key-generator value-generator)))
+
+(defun a-plist (key-generator value-generator)
+  (lambda ()
+    (loop repeat (generate an-index)
+       collect (generate key-generator)
+       collect (generate value-generator))))
+
+(defun an-improper-list (generator)
+  (lambda ()
+    (let ((lst (generate (a-pair generator generator))))
+      (loop repeat (generate an-index)
+	 do (setf lst (cons (generate generator) lst)))
+      lst)))
+
 (defun a-vector (generator)
   (lambda () (coerce (generate (a-list generator)) 'vector)))
+
+(defun an-array (dimensions generator)
+  (if (null dimensions)
+      (lambda () (make-array nil))
+      (labels ((n-tuple (n gen) (lambda () (loop repeat n collect (generate gen))))
+	       (chain (ds gen)
+		 (if (null ds)
+		     gen
+		     (chain (cdr ds) (n-tuple (car ds) gen)))))
+	(let* ((ds (reverse dimensions))
+	       (gen (chain (cdr ds) (n-tuple (car ds) generator)) ))
+	  (lambda ()
+	    (make-array dimensions :initial-contents (generate gen)))))))
 
 (defun a-hash (key-generator value-generator)
   (lambda ()
