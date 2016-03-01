@@ -8,9 +8,10 @@
   (:export
    #:tests #:qchecks #:quiet-check #:for-all
 
-   #:a-boolean #:a-string #:a-symbol #:a-char #:an-integer #:a-ratio #:a-number #:a-real #:an-atom #:a-value
+   #:a-boolean #:a-string #:a-symbol #:a-keyword #:a-char #:an-integer #:a-ratio #:a-number #:a-real #:an-atom #:a-value
    #:an-index  #:a-pair #:a-vector #:a-hash #:a-list #:a-member #:a-tuple
    #:one-of
+   #:a-specific-hash #:a-specific-plist #:a-specific-alist
 
    ;; re-export :quickcheck symbols
    #:quickcheck #:is= #:isnt= #:should-signal

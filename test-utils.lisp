@@ -92,6 +92,23 @@ Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet address
 	 do (setf (gethash k res) v))
       res)))
 
+(defun a-specific-hash (&rest k/gen-pairs)
+  (lambda ()
+    (let ((h (make-hash-table :test 'equalp)))
+      (loop for (k gen) on k/gen-pairs by #'cddr
+	 do (setf (gethash k h) (generate gen)))
+      h)))
+
+(defun a-specific-plist (&rest k/gen-pairs)
+  (lambda ()
+    (loop for (k gen) on k/gen-pairs by #'cddr
+       collect k collect (generate gen))))
+
+(defun a-specific-alist (&rest k/gen-pairs)
+  (lambda ()
+    (loop for (k gen) on k/gen-pairs by #'cddr
+       collect (cons k (generate gen)))))
+
 (defparameter an-atom
   (let ((primitive-atom (a-member a-number a-boolean a-string a-symbol a-char)))
     (a-member a-number a-boolean a-string a-symbol a-char
