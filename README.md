@@ -121,11 +121,11 @@ New generators that require some notes are
     ((20 12 -4) (-14 5 12) (13 -7 -4) (12 6 15)))
 	- ... and so forth
 
-	- `a-specific-hash`/`a-specific-alist`/`a-specific-plist` each take a list of keys and corresponding generators. They generate the appropriate map type with the given key constants, with corresponding generated values. For example
-		- `(generate (a-specific-alist :a an-integer :b a-string :c a-keyword))` ~> `((:A . 6) (:B . "f") (:C . :|FF|))`
-		- `(generate (a-specific-plist :a an-integer :b a-string :c a-keyword))` ~> `(:A 16 :B "úF¶-áYa*wÑj¾" :C :|y |)`
-		- `(generate (a-specific-hash :a an-integer :b a-string :c a-keyword))` ~> `#<HASH-TABLE :TEST EQUALP :COUNT 3 {100D76A2A3}>`
-			- _(and, yes, the contents of the `hash-table` are exactly what you'd expect)_
+- `a-specific-hash`/`a-specific-alist`/`a-specific-plist` each take a list of keys and corresponding generators. They generate the appropriate map type with the given key constants, with corresponding generated values. For example
+	- `(generate (a-specific-alist :a an-integer :b a-string :c a-keyword))` ~> `((:A . 6) (:B . "f") (:C . :|FF|))`
+	- `(generate (a-specific-plist :a an-integer :b a-string :c a-keyword))` ~> `(:A 16 :B "úF¶-áYa*wÑj¾" :C :|y |)`
+	- `(generate (a-specific-hash :a an-integer :b a-string :c a-keyword))` ~> `#<HASH-TABLE :TEST EQUALP :COUNT 3 {100D76A2A3}>`
+		- _(and, yes, the contents of the `hash-table` are exactly what you'd expect)_
 
 ### `tests (&rest forms)`
 
