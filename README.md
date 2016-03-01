@@ -114,11 +114,11 @@ New generators that require some notes are
 	- `(generate (an-array '() an-integer))` => `#0A0`
 	- `(generate (an-array '(5) an-integer))` ~> `#(-11 -3 13 15 -14)`
 	- `(generate (an-array '(5 4) an-integer))` ~> `#2A((-17 1 -8 0) (14 -7 -4 -1) (6 14 5 12) (-8 17 -18 1) (13 19 -12 -18))`
-	- `(generate (an-array '(5 4 3) an-integer))` ~> #3A(((-15 16 -6) (18 -15 -14) (-16 13 -17) (3 -1 17))
+	- `(generate (an-array '(5 4 3) an-integer))` ~> `#3A(((-15 16 -6) (18 -15 -14) (-16 13 -17) (3 -1 17))
     ((18 -7 4) (5 2 -4) (-3 -5 11) (9 0 -2))
     ((2 -5 8) (-2 -8 -5) (-20 5 -3) (-2 -5 -11))
     ((1 7 2) (-16 8 8) (10 1 -6) (-16 15 19))
-    ((20 12 -4) (-14 5 12) (13 -7 -4) (12 6 15)))
+    ((20 12 -4) (-14 5 12) (13 -7 -4) (12 6 15)))`
 	- ... and so forth
 
 - `a-specific-hash`/`a-specific-alist`/`a-specific-plist` each take a list of keys and corresponding generators. They generate the appropriate map type with the given key constants, with corresponding generated values. For example
