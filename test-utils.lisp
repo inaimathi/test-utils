@@ -1,19 +1,11 @@
 (in-package #:test-utils)
 
 ;;;;; Minor prove-utils
-(defun count-tests (test-forms)
-  (labels ((ct (test-tree)
-  	     (if (and (symbolp (car test-tree))
-		      (string= "SUBTEST" (symbol-name (car test-tree))))
-		 (loop for form in (rest (rest test-tree))sum (ct form))
-  		 1)))
-    (loop for form in test-forms sum (ct form))))
-
 (defmacro tests (&rest forms)
   "This hacks around :prove's requirement that a number of forms be provided, and #'prove:finalze be called around each set of :prove tests.
 Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet addressed."
   `(progn
-     (prove:plan ,(count-tests forms))
+     (prove:plan ,(length forms))
      ,@forms
      (prove:finalize)))
 
