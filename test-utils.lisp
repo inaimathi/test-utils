@@ -31,6 +31,9 @@ Pointed out at https://github.com/fukamachi/prove/issues/14, but not yet address
     (cl-quickcheck:for-all ,bindings ,test)
     ,(or message (write-to-string test))))
 
+(defmacro is-expand (got expected &optional desc)
+  `(is (agnostic-lizard:macroexpand-all ',got) ',expected ,desc))
+
 ;;;;; Make namespacing consistent amongst primitive quickcheck generators
 (defparameter a-string #'cl-quickcheck:a-string)
 (defparameter a-symbol #'cl-quickcheck:a-symbol)

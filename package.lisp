@@ -4,7 +4,7 @@
   (:use #:cl #:prove #:cl-quickcheck)
   (:import-from #:alexandria #:with-gensyms)
   (:shadowing-import-from #:prove #:is #:isnt)
-  (:shadow #:for-all)
+  (:shadow #:for-all #:is-expand)
   (:export
    #:tests #:qchecks #:quiet-check #:for-all
 
